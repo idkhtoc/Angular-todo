@@ -1,0 +1,26 @@
+<app-modal
+  (closeModalEvent)="closeModal()"
+>
+  <div class="comments" *ngIf="comments?.length">
+    <div class="comment" *ngFor="let comment of comments">
+      <div class="comment__info">
+        <h4 class="comment__info-text">
+          {{comment.comment}}
+        </h4>
+        <p class="comment__info-date">{{comment.created_date | date: 'HH:mm MMM/dd/Y'}}</p>
+      </div>
+      <button class="delete-comment" (click)="deleteComment(comment._id)">
+        <img src="../../../../../assets/trashbin.svg" alt="delete">
+      </button>
+    </div>
+  </div>
+  <p *ngIf="!comments?.length">There are no comments(</p>
+  <div class="add-comment" *ngIf="isCommentAdd">
+    <input type="text" name="comment" [(ngModel)]="commentAddValue">
+    <button (click)="addComment()" class="add-comment-btn">
+      <img src="../../../../../assets/check.svg" alt="add">
+    </button>
+    <button class="close-add" (click)="toggleCommentAdd()">&#10060;</button>
+  </div>
+  <button class="add" (click)="toggleCommentAdd()">Add Comment</button>
+</app-modal>

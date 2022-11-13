@@ -1,0 +1,26 @@
+<main class="form">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" >
+    <h1 class="form-title">Register</h1>
+    <div class="form-part">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" formControlName="email">
+      <div *ngIf="registerForm.invalid && emailControl?.touched && emailControl.errors">
+        <span *ngIf="emailControl.errors['required']">Email is required</span>
+        <span *ngIf="emailControl.errors['email']">Input must be an email</span>
+      </div>
+    </div>
+    <div class="form-part">
+      <label for="password">Password:</label>
+      <input type="password" id="password"  formControlName="password">
+      <div *ngIf="registerForm.invalid && passwordControl?.touched && passwordControl.errors">
+        <span *ngIf="passwordControl.errors['required']">Password is required</span>
+        <span *ngIf="passwordControl.errors['minlength']">Password must have at least 6 characters</span>
+      </div>
+    </div>
+    <button type="submit" class="submit" [disabled]="registerForm.invalid">Sign In</button>
+    <div class="link">
+      Already have an account? 
+      <a routerLink="/login">Log In!</a>
+    </div>
+  </form>
+</main>

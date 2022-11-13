@@ -1,0 +1,32 @@
+<section class="dashboard-header">
+  <h2 class="dashboard-header__title">{{title}}</h2>
+  <button class="open" (click)="openDescModal()" *ngIf="filterType === FilterType.tasks">Description</button>
+  <button class="open" (click)="openArchiveModal()" *ngIf="filterType === FilterType.tasks">Archive</button>
+  <div class="dashboard-header__search-panel">
+    <input 
+      type="search" 
+      name="search" 
+      id="search" 
+      placeholder="Find !" 
+      class="search" 
+      appDelayedInput
+      (delayedInput)="search($event)"
+      [delayTime]="600"
+    >
+    <select class="filter" name="filter" (change)="selectFilterValue($event)">
+      <option value="date" selected>Date</option>
+      <option value="name">Name</option>
+      <optgroup label="Number of tasks" *ngIf="filterType === FilterType.boards">
+        <option value="TD">ToDo</option>
+        <option value="IP">In progress</option>
+        <option value="D">Done</option>
+      </optgroup>
+    </select>
+    <select class="direction" name="direction" (change)="selectFilterDirection($event)">
+      <option value="DESC" selected>DESC</option>
+      <option value="ASC">ASC</option>
+    </select>
+    <button *ngIf="filterType === FilterType.boards" class="add" (click)="openAddModal()">Add Board</button>
+    <button *ngIf="filterType === FilterType.tasks" class="delete" (click)="deleteBoard()">Delete Board</button>
+  </div>
+</section>

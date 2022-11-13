@@ -1,0 +1,22 @@
+<div class="task-modal">
+  <textarea
+    class="task__name"
+    name="taskName"
+    [(ngModel)]="name"
+    maxlength="128"
+  ></textarea>
+  <div class="buttons">
+    <button 
+      class="add"
+      (click)="addTask()"
+    >
+      <img src="../../../../../assets/check.svg" alt="check">
+    </button>
+    <button 
+      class="close"
+      (click)="closeModal()"
+    >
+      &#10060;
+    </button>
+  </div>
+</div>

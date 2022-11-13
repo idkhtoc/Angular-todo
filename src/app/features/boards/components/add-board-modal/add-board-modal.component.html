@@ -1,0 +1,21 @@
+<app-modal 
+  (closeModalEvent)="closeModal()"
+>
+  <h1 class="modal-inner__title">Add board</h1>
+  <form [formGroup]="addBoardForm" (ngSubmit)="addBoard()">
+    <div class="form-part">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" formControlName="name" required>
+      <div *ngIf="addBoardForm.invalid && nameControl.touched && nameControl.errors">
+        <span *ngIf="nameControl.errors['required']">Name is required</span>
+        <span *ngIf="nameControl.errors['minlength']">Min length is 4</span>
+        <span *ngIf="nameControl.errors['maxlength']">Max length is 16</span>
+      </div>
+    </div>
+    <div class="form-part">
+      <label for="description">Description:</label>
+      <textarea type="text" name="description" id="description" formControlName="description"></textarea>
+    </div>
+    <button type="submit" class="submit" [disabled]="addBoardForm.invalid">Add</button>
+  </form>
+</app-modal>

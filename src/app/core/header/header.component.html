@@ -1,0 +1,6 @@
+<header>
+  <button class="back" (click)="back()" *ngIf="!['/boards', '/', '/login', '/register'].includes(url)">
+    <img src="../../../assets/back.svg" alt="back">
+  </button>
+  <button class="logout" (click)="logout()" [disabled]="!(isLoggedIn | async)" >Logout</button>
+</header>

@@ -1,0 +1,40 @@
+@import '../../../variables/variables';
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $header-bg;
+  height: 5vh;
+  .back {
+    background: none;
+    width: 5%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    transition: all .5s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .logout {
+    border: none;
+    font-size: 1.2rem;
+    padding: .5rem;
+    background: $logout-bg-c;
+    cursor: pointer;
+    transition: all .5s ease;
+    height: 100%;
+    margin-left: auto;
+    &:not(:disabled):hover {
+      opacity: .7;
+    }
+    &:disabled {
+      cursor: default;
+    }
+  }
+}

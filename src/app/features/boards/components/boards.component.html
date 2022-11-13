@@ -1,0 +1,30 @@
+<main class="dashboard">
+  <app-filter-header
+    title="Dashboard"
+    [filterType]="filterType"
+    (openModalEvent)="openModal()"
+    (searchEvent)="search($event)"
+    (selectFilterDirectionEvent)="setFilterDirection($event)"
+    (selectFilterValueEvent)="setFilterValue($event)"
+    (openAddModalEvent)="openModal()"
+  ></app-filter-header>
+
+  <section class="boards">
+    <div class="boards-wrapper">
+      <app-board
+        *ngFor="let board of boards | async | filter: searchValue : filterDirection : filterValue"
+        [board]="board"
+        [isBoardUpdating]="boardUpdating === board._id"
+        (updateBoardEvent)="updateBoard($event, board.name, board._id)"
+        (deleteBoardEvent)="deleteBoard(board._id)"
+        (setBoardUpdatingEvent)="setBoardUpdating(board._id)"
+      ></app-board>
+    </div>
+  </section>
+
+  <app-add-board-modal 
+    *ngIf="isModalOpen"
+    (addBoardEvent)="addBoard($event)"
+    (closeModalEvent)="closeModal()"
+  ></app-add-board-modal>
+</main>

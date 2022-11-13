@@ -1,0 +1,38 @@
+<div 
+  [ngClass]="{ 'task': true, 'updating': isTaskUpdating }"
+  [draggable]="!isTaskUpdating"
+  (dragstart)="dragStart($event)"
+  (dragend)="dragEnd($event)"
+>
+  <div class="task__info">
+    <p class="task__info-name" *ngIf="!isTaskUpdating">{{task.name | description: 128}}</p>
+    <textarea 
+      *ngIf="isTaskUpdating"
+      class="task__info-name_active"
+      name="taskName"
+      [(ngModel)]="taskUpdatingValue"
+      maxlength="128"
+    ></textarea>
+    <p class="task__info-date">{{task.created_date | date: 'HH:mm MMM/dd/Y'}}</p>
+    <a class="task__info-comments"  *ngIf="!isTaskUpdating" (click)="openModal()">Comments: {{task.comments.length}}</a>
+  </div>
+  <div class="buttons" *ngIf="!isTaskUpdating">
+    <button class="change" (click)="setTaskUpdating()">
+      <img src="../../../../../assets/change.svg" alt="change" draggable="false">
+    </button>
+    <button class="archive" (click)="archiveTask()">
+      <img src="../../../../../assets/archive.svg" alt="archive" draggable="false">
+    </button>
+  </div>
+  <div class="buttons" *ngIf="isTaskUpdating">
+    <button 
+      class="update"
+      (click)="updateTask()"
+    >
+      <img src="../../../../../assets/check.svg" alt="check" draggable="false">
+    </button>
+    <button class="delete" (click)="deleteTask()">
+      <img src="../../../../../assets/trashbin.svg" alt="trashbin" draggable="false">
+    </button>
+  </div>
+</div>

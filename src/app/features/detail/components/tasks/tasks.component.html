@@ -1,0 +1,42 @@
+<div class="tasks">
+  <div 
+    *ngFor="let status of [Status.TD, Status.IP, Status.D]" 
+    appDraglist 
+    [status]="status" 
+    [taskId]="dragTaskId" 
+    [prevStatus]="prevStatus"
+    appColumnColor
+    [color]="colors[status]"
+  >
+    <div class="tasks-content">
+      <input
+        type="color" 
+        name="color" 
+        appDelayedInput
+        (delayedInput)="colorChange($event, status)"
+        [defaultValue]="colors[status] || '#50a0a5'"
+        [delayTime]="600"
+      >
+      <h2>{{title(status)}}</h2>
+      <div class="tasks-wrapper">
+        <app-task
+          *ngFor="let task of tasks! | filterTasks: false : status" 
+          [task]="task"
+          [isTaskUpdating]="task._id === taskUpdating"
+          (dragStartEvent)="dragStart(task)"
+          (openModalEvent)="openTaskModal(task._id)"
+          (updateTaskEvent)="updateTask($event, task.name, task._id)"
+          (archiveTaskEvent)="archiveTask(task._id)"
+          (deleteTaskEvent)="deleteTask(task._id)"
+          (setTaskUpdatingEvent)="setTaskUpdating(task._id)"
+        ></app-task>
+      </div>
+      <app-add-task-modal 
+        *ngIf="openedAddForm === status"
+        (addTaskEvent)="addTask($event, status)"
+        (closeModalEvent)="toggleAddForm()"
+      ></app-add-task-modal>
+      <button class="add-btn" (click)="toggleAddForm(status)">+</button>
+    </div>
+  </div>  
+</div>

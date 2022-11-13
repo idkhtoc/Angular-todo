@@ -1,0 +1,70 @@
+@import '../../../variables/variables';
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 100vw;
+  background: $auth-bg;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    width: 20%;
+  }
+  &-title {
+    font-size: 2.4rem;
+    color: $auth-color;
+  }
+  &-part {
+    width: 100%;
+    input {
+      width: 100%;
+      background: $auth-input-bg;
+      border: none;
+      padding: .5rem;
+      font-size: 1rem;
+      color: $auth-color;
+      box-shadow: 0 1px 5px 1px rgba(0, 0, 0, .5);
+      margin: .4rem 0 .4rem;
+      &:focus {
+        outline: none;
+      }
+    }
+    label {
+      color: $auth-color;
+    }
+    div {
+      color: $auth-warning-color;
+      margin-left: 1rem;
+    }
+  }
+  .submit {
+    width: 100%;
+    background: $auth-submit-bg;
+    border: none;
+    font-size: 1.2rem;
+    color: $auth-color;
+    padding: .4rem;
+    cursor: pointer;
+    transition: all .5s ease;
+    &:not(:disabled):hover {
+      opacity: .7;
+      transform: scale(1.2);
+    }
+    &:disabled {
+      cursor: default;
+      opacity: .5;
+    }
+  }
+  .link {
+    width: 90%;
+    a {
+      text-decoration: none;
+      color: $auth-link-color;
+      font-size: 1.2rem;
+    }
+  }
+}

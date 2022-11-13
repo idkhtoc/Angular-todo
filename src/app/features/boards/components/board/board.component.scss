@@ -1,0 +1,97 @@
+@import '../../../../../variables/variables';
+
+:host {
+  width: 30%;
+  height: fit-content;
+}
+
+.board {
+  position: relative;
+  display: block;
+  background: #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .4);
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10rem;
+    padding: 1rem;
+    font-size: 1.2rem;
+    &-name {
+      cursor: pointer;
+      width: fit-content;
+      &_active {
+        padding: .5rem;
+        font-size: 1rem;
+        background: #f4f4f4;
+        font-weight: 700;
+        border: none;
+        width: 100%;
+      }
+    }
+    &-description {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+  }
+  .counts {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    cursor: default;
+    height: 2rem;
+    background: #555555;
+    font-size: 1.2rem;
+    .todo {
+      color: #d6c45b;
+    }
+    .ip {
+      color: #5cb8dd;
+    }
+    .done {
+      color: #88ce60;
+    }
+  }
+  .buttons {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: 0;
+    right: 0;
+    height: 120%;
+    width: 2rem;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      width: 100%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  &:hover,
+  &.updating {
+    .buttons {
+      transform: translateX(2.4rem);
+      opacity: 1;
+    }
+    .counts {
+      transform: translateY(2rem);
+      opacity: 1;
+    }
+  }
+}

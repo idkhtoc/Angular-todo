@@ -1,0 +1,65 @@
+<main class="detail" *ngIf="board | async as board">
+  <app-filter-header
+    [title]="board.name"
+    [filterType]="filterType"
+    (searchEvent)="search($event)"
+    (selectFilterDirectionEvent)="setFilterDirection($event)"
+    (selectFilterValueEvent)="setFilterValue($event)"
+    (deleteBoardEvent)="deleteBoard()"
+    (openDescModalEvent)="toggleDescModal()"
+    (openArchiveModalEvent)="toggleArchiveModal()"
+  ></app-filter-header>
+
+  <app-tasks 
+    [tasks]="board.tasks | filter: searchValue : filterDirection : filterValue"
+    [colors]="board.colors"
+    [taskUpdating]="taskUpdating"
+    (openTaskModalEvent)="openTaskModal($event)"
+    (addTaskEvent)="addTask($event)"
+    (updateTaskEvent)="updateTask($event)"
+    (setTaskUpdatingEvent)="setTaskUpdating($event)"
+    (deleteTaskEvent)="deleteTask($event)"
+    (archiveTaskEvent)="toggleArchiveTask($event)"
+    (colorChangeEvent)="colorChange($event)"
+  ></app-tasks>
+
+  <app-task-comments-modal
+    *ngIf="isTaskModalOpen"
+    [isCommentAdd]="isCommentAdd"
+    [comments]="comments | async"
+    (closeModalEvent)="closeTaskModal()"
+    (addCommentEvent)="addComment($event)"
+    (deleteCommentEvent)="deleteComment($event)"
+    (toggleCommentAddEvent)="toggleCommentAdd()"
+  ></app-task-comments-modal>
+
+  <app-modal 
+    (closeModalEvent)="toggleDescModal()"
+    *ngIf="isDescModalOpen"
+  >
+     <p class="description">Description: {{board.description || 'There is no description('}}</p>
+  </app-modal>
+
+  <app-modal
+    (closeModalEvent)="toggleArchiveModal()"
+    *ngIf="isArchiveModalOpen"
+  >
+    <p *ngIf="!(board.tasks | filterTasks: true).length">There are no archived tasks(</p>
+    <div class="archived-tasks">
+      <div class="archived-task" *ngFor="let task of board.tasks | filterTasks: true">
+        <div class="archived-task__info">
+          <p class="archived-task__info-name">{{task.name}}</p>
+          <p class="archived-task__info-date">{{task.created_date | date: 'HH:mm MMM/dd/Y'}}</p>
+        </div>
+        <div class="buttons">
+          <button (click)="toggleArchiveTask(task._id)">
+            <img src="../../../../assets/disarchive.svg" alt="disarchive">
+          </button>
+          <button (click)="deleteTask(task._id)">
+            <img src="../../../../assets/trashbin.svg" alt="delete">
+          </button>
+        </div>
+      </div>
+    </div>
+  </app-modal>
+</main>

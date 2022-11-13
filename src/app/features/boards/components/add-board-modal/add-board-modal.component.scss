@@ -1,0 +1,47 @@
+@import '../../../../../variables/variables';
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  .form-part {
+    width: 60%;
+    margin-bottom: 3rem;
+    div {
+      margin-top: .5rem;
+      span {
+        color: #af5050;
+      }
+    }
+    input,
+    textarea {
+      background: #b4b4b4;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      border: none;
+      width: 100%;
+      padding: .5rem 1rem;
+    }
+    textarea {
+      resize: none;
+      height: 10rem;
+    }
+  }
+  .submit {
+    padding: .5rem;
+    width: 60%;
+    border: none;
+    font-size: 1.2rem;
+    background: $auth-submit-bg;
+    transition: all .5s ease;
+    &:not(:disabled) {
+      cursor: pointer;
+      &:hover {
+        transform: translateY(-1rem);
+      }
+    }
+  }
+}

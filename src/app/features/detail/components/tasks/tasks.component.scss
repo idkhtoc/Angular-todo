@@ -1,0 +1,53 @@
+@import '../../../../../variables/variables';
+
+:host {
+  flex: 1;
+}
+
+.tasks {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  width: 100%;
+  min-height: 80vh;
+  & > div {
+    min-height: 100%;
+    width: 30%;
+  }
+  &-content {
+    position: relative;
+    padding: .5rem;
+    height: fit-content;
+    background: rgba(169, 169, 169, 0.4);
+    h2 {
+      margin-bottom: 1rem;
+    }
+    input[type=color] {
+      position: absolute;
+      right: .5rem;
+      top: .5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      &::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      &::-webkit-color-swatch {
+        border: none;
+      }
+    }
+    .add-btn {
+      background: #fff;
+      width: 100%;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      transition: all .5s ease-in;
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
+}

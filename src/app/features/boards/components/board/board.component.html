@@ -1,0 +1,29 @@
+<div [ngClass]="{ 'board': true, 'updating': isBoardUpdating }">
+  <div class="board__text">
+    <h3 class="board__text-name" *ngIf="!isBoardUpdating" [routerLink]="board._id">{{board.name}}</h3>
+    <input 
+      *ngIf="isBoardUpdating"
+      class="board__text-name_active"
+      name="boardName"
+      [(ngModel)]="boardUpdatingValue"
+    >
+    <p class="board__text-description">{{board.description | description: 16}}</p>
+    <p class="board__text-date">{{board.created_date | date: 'HH:mm MMM/dd/Y'}}</p>
+  </div>
+  <div class="counts">
+    <div class="todo">TD: {{board.tasks | getTasksCount: Status.TD}}</div>
+    <div class="ip">IP: {{board.tasks | getTasksCount: Status.IP}}</div>
+    <div class="done">D: {{board.tasks | getTasksCount: Status.D}}</div>
+  </div>
+  <div class="buttons">
+    <button class="change" (click)="setBoardUpdating()" *ngIf="!isBoardUpdating">
+      <img src="../../../../../assets/change.svg" alt="change">
+    </button>
+    <button class="delete" (click)="deleteBoard()" *ngIf="isBoardUpdating">
+      <img src="../../../../../assets/trashbin.svg" alt="trashbin">
+    </button>
+    <button class="update" (click)="updateBoard()" *ngIf="isBoardUpdating">
+      <img src="../../../../../assets/check.svg" alt="check">
+    </button>
+  </div>
+</div>
